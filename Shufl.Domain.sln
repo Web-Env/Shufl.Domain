@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shufl.Domain.Enums", "Shufl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7165FEB1-69B6-44B9-94C1-D141DF86C0DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shufl.Domain.Tests", "Tests\Shufl.Domain.Tests\Shufl.Domain.Tests.csproj", "{E6491E13-8D88-412D-A6DC-88F9BD28580A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shufl.Domain.Repositories.Tests", "Tests\Shufl.Domain.Repositories.Tests\Shufl.Domain.Repositories.Tests.csproj", "{15FE5BAA-6D08-46F6-9A87-787BD3223C8D}"
 EndProject
 Global
@@ -39,10 +37,6 @@ Global
 		{280DBF1D-5AF6-4FE2-9027-179822C85715}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{280DBF1D-5AF6-4FE2-9027-179822C85715}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{280DBF1D-5AF6-4FE2-9027-179822C85715}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6491E13-8D88-412D-A6DC-88F9BD28580A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6491E13-8D88-412D-A6DC-88F9BD28580A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6491E13-8D88-412D-A6DC-88F9BD28580A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6491E13-8D88-412D-A6DC-88F9BD28580A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15FE5BAA-6D08-46F6-9A87-787BD3223C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15FE5BAA-6D08-46F6-9A87-787BD3223C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15FE5BAA-6D08-46F6-9A87-787BD3223C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,7 +46,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E6491E13-8D88-412D-A6DC-88F9BD28580A} = {7165FEB1-69B6-44B9-94C1-D141DF86C0DD}
 		{15FE5BAA-6D08-46F6-9A87-787BD3223C8D} = {7165FEB1-69B6-44B9-94C1-D141DF86C0DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
