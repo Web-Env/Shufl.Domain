@@ -8,17 +8,13 @@ namespace Shufl.Domain.Repositories
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private readonly ShuflRepositoryContext _shuflContext;
-
         public IPasswordResetRepository PasswordResetRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
 
         public RepositoryManager(ShuflRepositoryContext context)
         {
-            _shuflContext = context;
-
-            PasswordResetRepository = new PasswordResetRepository(_shuflContext);
-            UserRepository = new UserRepository(_shuflContext);
+            PasswordResetRepository = new PasswordResetRepository(context);
+            UserRepository = new UserRepository(context);
         }
 
         public void Dispose()
