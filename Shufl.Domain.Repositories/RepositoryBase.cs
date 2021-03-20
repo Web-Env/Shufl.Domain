@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shufl.Domain.Repositories.Contexts;
+using Shufl.Domain.Entities;
 using Shufl.Domain.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,8 +11,8 @@ namespace Shufl.Domain.Repositories
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected readonly ShuflRepositoryContext _ShuflContext;
-        public RepositoryBase(ShuflRepositoryContext context)
+        protected readonly ShuflContext _ShuflContext;
+        public RepositoryBase(ShuflContext context)
         {
             _ShuflContext = context;
         }

@@ -1,4 +1,4 @@
-﻿using Shufl.Domain.Repositories.Contexts;
+﻿using Shufl.Domain.Entities;
 using Shufl.Domain.Repositories.Interfaces;
 using Shufl.Domain.Repositories.UserRepositories;
 using Shufl.Domain.Repositories.UserRepositories.Interfaces;
@@ -11,7 +11,7 @@ namespace Shufl.Domain.Repositories
         public IPasswordResetRepository PasswordResetRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
 
-        public RepositoryManager(ShuflRepositoryContext context)
+        public RepositoryManager(ShuflContext context)
         {
             PasswordResetRepository = new PasswordResetRepository(context);
             UserRepository = new UserRepository(context);
