@@ -26,8 +26,8 @@ namespace Shufl.Domain.Entities
         public string SpotifyUrl { get; set; }
         public string SpotifyMarket { get; set; }
         public DateTime CreatedOn { get; set; }
-        public DateTime LastUpdatedOn { get; set; }
-        public Guid LastUpdatedBy { get; set; }
+        public DateTime? LastUpdatedOn { get; set; }
+        public Guid? LastUpdatedBy { get; set; }
 
         public virtual ICollection<PasswordReset> PasswordResets { get; set; }
     }
