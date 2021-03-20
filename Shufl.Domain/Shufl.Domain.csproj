@@ -8,4 +8,10 @@
     <Description>Domain logic for the Shufl APIs</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shufl.Domain.Entities\Shufl.Domain.Entities.csproj" />
+    <ProjectReference Include="..\Shufl.Domain.Enums\Shufl.Domain.Enums.csproj" />
+    <ProjectReference Include="..\Shufl.Domain.Repositories\Shufl.Domain.Repositories.csproj" />
+  </ItemGroup>
+
 </Project>

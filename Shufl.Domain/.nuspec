@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Shufl.Domain</id>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <description>Domain logic for the Shufl APIs</description>
     <authors>Adam Barry-O'Donovan</authors>
     <projectUrl>https://github.com/Web-Env/Shufl.Domain</projectUrl>
@@ -14,7 +14,7 @@
   </metadata>
   <files>
     <file src="..\Shufl.Domain\bin\Release\net5.0\Shufl.Domain.Entities.dll" target="lib\net5.0\Shufl.Domain.Entities.dll" />
-    <file src="..\Shufl.Domain\bin\Release\net5.0\Shufl.Domain.Repositories.dll" target="lib\net5.0\Shufl.Domain.Repositories.dll" />
     <file src="..\Shufl.Domain\bin\Release\net5.0\Shufl.Domain.Enums.dll" target="lib\net5.0\Shufl.Domain.Enums.dll" />
+    <file src="..\Shufl.Domain\bin\Release\net5.0\Shufl.Domain.Repositories.dll" target="lib\net5.0\Shufl.Domain.Repositories.dll" />
   </files>
 </package>
