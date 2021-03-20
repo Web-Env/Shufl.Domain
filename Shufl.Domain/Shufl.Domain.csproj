@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Adam Barry-O'Donovan</Authors>
+    <Company>WebEnv</Company>
+    <Description>Domain logic for the Shufl APIs</Description>
+  </PropertyGroup>
+
+</Project>
