@@ -31,6 +31,6 @@ jobs:
     - name: Build (Release)
       run: dotnet build -c Release --no-restore
     - name: Pack
-      run: nuget pack ./Shufl.Domain.All/.nuspec -OutputDirectory ./dist/ -Prop Configuration=Release -Suffix CI-${GITHUB_RUN_NUMBER}
+      run: nuget pack ./Shufl.Domain/.nuspec -OutputDirectory ./dist/ -Prop Configuration=Release -Suffix CI-${GITHUB_RUN_NUMBER}
     - name: Publish
       run: dotnet nuget push ./dist/*nupkg -s https://nuget.pkg.github.com/Web-Env/index.json --api-key="${{ secrets.GPR_TOKEN }}"
