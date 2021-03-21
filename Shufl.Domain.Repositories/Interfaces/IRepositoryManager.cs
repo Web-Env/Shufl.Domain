@@ -8,5 +8,7 @@ namespace Shufl.Domain.Repositories.Interfaces
         IPasswordResetRepository PasswordResetRepository { get; }
 
         IUserRepository UserRepository { get; }
+
+        IUserVerificationRepository UserVerificationRepository { get; }
     }
 }
