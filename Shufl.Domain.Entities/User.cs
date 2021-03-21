@@ -10,6 +10,7 @@ namespace Shufl.Domain.Entities
         public User()
         {
             PasswordResets = new HashSet<PasswordReset>();
+            UserVerifications = new HashSet<UserVerification>();
         }
 
         public Guid Id { get; set; }
@@ -20,6 +21,7 @@ namespace Shufl.Domain.Entities
         public string LastName { get; set; }
         public string PictureUrl { get; set; }
         public string Password { get; set; }
+        public bool? IsVerified { get; set; }
         public bool IsAdmin { get; set; }
         public string SpotifyToken { get; set; }
         public string SpotifyUsername { get; set; }
@@ -30,5 +32,6 @@ namespace Shufl.Domain.Entities
         public Guid? LastUpdatedBy { get; set; }
 
         public virtual ICollection<PasswordReset> PasswordResets { get; set; }
+        public virtual ICollection<UserVerification> UserVerifications { get; set; }
     }
 }
