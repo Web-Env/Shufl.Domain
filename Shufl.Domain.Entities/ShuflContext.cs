@@ -44,7 +44,15 @@ namespace Shufl.Domain.Entities
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.RequesterAddress)
                     .IsRequired()
@@ -152,7 +160,15 @@ namespace Shufl.Domain.Entities
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.CreatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.RequesterAddress)
                     .HasMaxLength(15)

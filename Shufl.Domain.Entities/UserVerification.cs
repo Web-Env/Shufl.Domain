@@ -15,6 +15,8 @@ namespace Shufl.Domain.Entities
         public string RequesterAddress { get; set; }
         public DateTime? UsedOn { get; set; }
         public string UsedByAddress { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
 
         public virtual User User { get; set; }
     }
