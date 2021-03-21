@@ -154,6 +154,10 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
 
+                entity.Property(e => e.RequesterAddress)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.UsedByAddress)
                     .HasMaxLength(15)
                     .IsUnicode(false);
