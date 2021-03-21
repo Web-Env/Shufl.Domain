@@ -19,6 +19,7 @@ namespace Shufl.Domain.Entities
 
         public virtual DbSet<PasswordReset> PasswordResets { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserVerification> UserVerifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,6 +39,10 @@ namespace Shufl.Domain.Entities
                 entity.ToTable("PasswordReset");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Active)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
 
@@ -90,6 +95,8 @@ namespace Shufl.Domain.Entities
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.IsVerified).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(150)
@@ -130,6 +137,40 @@ namespace Shufl.Domain.Entities
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserVerification>(entity =>
+            {
+                entity.ToTable("UserVerification");
+
+                entity.HasIndex(e => e.VerificationIdentifier, "IX_UserVerification")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Active)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UsedByAddress)
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UsedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.VerificationIdentifier)
+                    .IsRequired()
+                    .HasMaxLength(60)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserVerifications)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserVerification_User");
             });
 
             OnModelCreatingPartial(modelBuilder);
