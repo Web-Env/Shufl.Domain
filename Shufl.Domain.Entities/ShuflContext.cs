@@ -53,7 +53,7 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.ResetIdentifier)
                     .IsRequired()
-                    .HasMaxLength(60)
+                    .HasMaxLength(64)
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
@@ -162,7 +162,7 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.VerificationIdentifier)
                     .IsRequired()
-                    .HasMaxLength(60)
+                    .HasMaxLength(64)
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
