@@ -10,11 +10,13 @@ namespace Shufl.Domain.Repositories
     {
         public IPasswordResetRepository PasswordResetRepository { get; private set; }
         public IUserRepository UserRepository { get; private set; }
+        public IUserVerificationRepository UserVerificationRepository { get; private set; }
 
         public RepositoryManager(ShuflContext context)
         {
             PasswordResetRepository = new PasswordResetRepository(context);
             UserRepository = new UserRepository(context);
+            UserVerificationRepository = new UserVerificationRepository(context);
         }
 
         public void Dispose()
