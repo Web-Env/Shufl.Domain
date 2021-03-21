@@ -24,6 +24,5 @@ namespace Shufl.Domain.Repositories.Tests
             Assert.NotNull(fetchedUser);
             Assert.IsAssignableFrom<User>(fetchedUser);
         }
-                new User()
     }
 }
