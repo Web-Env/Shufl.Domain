@@ -146,7 +146,7 @@ namespace Shufl.Domain.Entities
                 entity.HasIndex(e => e.VerificationIdentifier, "IX_UserVerification")
                     .IsUnique();
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
                 entity.Property(e => e.Active)
                     .IsRequired()
