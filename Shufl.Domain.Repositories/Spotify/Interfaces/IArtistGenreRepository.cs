@@ -3,7 +3,7 @@ using Shufl.Domain.Repositories.Interfaces;
 
 namespace Shufl.Domain.Repositories.Spotify.Interfaces
 {
-    public interface IArtistRepository : IRepositoryBase<Artist>
+    public interface IArtistGenreRepository : IRepositoryBase<ArtistGenre>
     {
     }
 }
