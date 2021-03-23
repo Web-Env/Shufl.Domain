@@ -1,4 +1,5 @@
-﻿using Shufl.Domain.Repositories.Music.Interfaces;
+﻿using Shufl.Domain.Repositories.Group.Interfaces;
+using Shufl.Domain.Repositories.Music.Interfaces;
 using Shufl.Domain.Repositories.Spotify.Interfaces;
 using Shufl.Domain.Repositories.User.Interfaces;
 using System;
@@ -14,6 +15,16 @@ namespace Shufl.Domain.Repositories.Interfaces
         IArtistGenreRepository ArtistGenreRepository { get; }
 
         IGenreRepository GenreRepository { get; }
+
+        IGroupRepository GroupRepository { get; }
+
+        IGroupInviteRepository GroupInviteRepository { get; }
+
+        IGroupMemberRepository GroupMemberRepository { get; }
+
+        IGroupSuggestionRepository GroupSuggestionRepository { get; }
+
+        IGroupSuggestionRatingRepository GroupSuggestionRatingRepository { get; }
 
         IPasswordResetRepository PasswordResetRepository { get; }
 
