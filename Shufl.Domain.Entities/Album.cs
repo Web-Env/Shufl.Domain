@@ -9,6 +9,7 @@ namespace Shufl.Domain.Entities
     {
         public Album()
         {
+            GroupSuggestions = new HashSet<GroupSuggestion>();
             Tracks = new HashSet<Track>();
         }
 
@@ -22,6 +23,7 @@ namespace Shufl.Domain.Entities
         public string LargeIcon { get; set; }
 
         public virtual Artist Artist { get; set; }
+        public virtual ICollection<GroupSuggestion> GroupSuggestions { get; set; }
         public virtual ICollection<Track> Tracks { get; set; }
     }
 }
