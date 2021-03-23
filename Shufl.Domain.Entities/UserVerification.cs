@@ -8,7 +8,7 @@ namespace Shufl.Domain.Entities
     public partial class UserVerification
     {
         public Guid Id { get; set; }
-        public string VerificationIdentifier { get; set; }
+        public string Identifier { get; set; }
         public Guid UserId { get; set; }
         public DateTime ExpiryDate { get; set; }
         public bool? Active { get; set; }

@@ -18,7 +18,6 @@ namespace Shufl.Domain.Entities
             GroupMemberUsers = new HashSet<GroupMember>();
             GroupSuggestionCreatedByNavigations = new HashSet<GroupSuggestion>();
             GroupSuggestionLastUpdatedByNavigations = new HashSet<GroupSuggestion>();
-            PasswordResets = new HashSet<PasswordReset>();
             UserVerifications = new HashSet<UserVerification>();
         }
 
@@ -30,7 +29,7 @@ namespace Shufl.Domain.Entities
         public string LastName { get; set; }
         public string PictureUrl { get; set; }
         public string Password { get; set; }
-        public bool? IsVerified { get; set; }
+        public bool IsVerified { get; set; }
         public bool IsAdmin { get; set; }
         public string SpotifyToken { get; set; }
         public string SpotifyUsername { get; set; }
@@ -49,7 +48,6 @@ namespace Shufl.Domain.Entities
         public virtual ICollection<GroupMember> GroupMemberUsers { get; set; }
         public virtual ICollection<GroupSuggestion> GroupSuggestionCreatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestion> GroupSuggestionLastUpdatedByNavigations { get; set; }
-        public virtual ICollection<PasswordReset> PasswordResets { get; set; }
         public virtual ICollection<UserVerification> UserVerifications { get; set; }
     }
 }
