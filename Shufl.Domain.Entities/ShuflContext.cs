@@ -354,6 +354,12 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.LastUpdatedOn)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -363,23 +369,17 @@ namespace Shufl.Domain.Entities
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ResetIdentifier)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
                 entity.Property(e => e.UsedByAddress)
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UsedOn).HasColumnType("datetime");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PasswordResets)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PasswordReset_User");
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(344)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
             });
 
             modelBuilder.Entity<Track>(entity =>
@@ -437,8 +437,6 @@ namespace Shufl.Domain.Entities
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IsVerified).HasDefaultValueSql("((0))");
-
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(150)
@@ -485,7 +483,7 @@ namespace Shufl.Domain.Entities
             {
                 entity.ToTable("UserVerification");
 
-                entity.HasIndex(e => e.VerificationIdentifier, "IX_UserVerification")
+                entity.HasIndex(e => e.Identifier, "IX_UserVerification")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
@@ -500,6 +498,12 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.ExpiryDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.LastUpdatedOn)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -513,12 +517,6 @@ namespace Shufl.Domain.Entities
                     .IsUnicode(false);
 
                 entity.Property(e => e.UsedOn).HasColumnType("datetime");
-
-                entity.Property(e => e.VerificationIdentifier)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserVerifications)
