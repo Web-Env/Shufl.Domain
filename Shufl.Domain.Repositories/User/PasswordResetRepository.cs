@@ -13,7 +13,7 @@ namespace Shufl.Domain.Repositories.User
         public async Task<PasswordReset> FetchByIdentifier(string resetIdentifier)
         {
             var passwordReset = await _ShuflContext.PasswordResets.Where(pr =>
-                pr.ResetIdentifier == resetIdentifier).FirstOrDefaultAsync();
+                pr.Identifier == resetIdentifier).FirstOrDefaultAsync();
 
             return passwordReset;
         }
