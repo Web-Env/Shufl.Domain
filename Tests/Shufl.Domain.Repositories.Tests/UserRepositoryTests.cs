@@ -1,7 +1,5 @@
-﻿using Shufl.Domain.Entities;
-using Shufl.Domain.Repositories.UserRepositories;
+﻿using Shufl.Domain.Repositories.User;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,7 +12,7 @@ namespace Shufl.Domain.Repositories.Tests
         public async Task GetById_ShouldReturnSingleUser()
         {
             //Arrange
-            var context = RepositoryTestHelper.CreateMockContext<User>();
+            var context = RepositoryTestHelper.CreateMockContext<Entities.User>();
             var repository = new UserRepository(context.Object);
 
             //Act
@@ -22,7 +20,7 @@ namespace Shufl.Domain.Repositories.Tests
 
             //Assert
             Assert.NotNull(fetchedUser);
-            Assert.IsAssignableFrom<User>(fetchedUser);
+            Assert.IsAssignableFrom<Entities.User>(fetchedUser);
         }
     }
 }

@@ -2,7 +2,7 @@
 using Shufl.Domain.Repositories.Interfaces;
 using System.Threading.Tasks;
 
-namespace Shufl.Domain.Repositories.UserRepositories.Interfaces
+namespace Shufl.Domain.Repositories.User.Interfaces
 {
     public interface IPasswordResetRepository : IRepositoryBase<PasswordReset>
     {

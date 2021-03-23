@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shufl.Domain.Entities;
-using Shufl.Domain.Repositories.UserRepositories.Interfaces;
+using Shufl.Domain.Repositories.User.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shufl.Domain.Repositories.UserRepositories
+namespace Shufl.Domain.Repositories.User
 {
     public class UserVerificationRepository : RepositoryBase<UserVerification>, IUserVerificationRepository
     {
