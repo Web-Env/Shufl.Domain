@@ -9,6 +9,15 @@ namespace Shufl.Domain.Entities
     {
         public User()
         {
+            GroupCreatedByNavigations = new HashSet<Group>();
+            GroupInviteCreatedByNavigations = new HashSet<GroupInvite>();
+            GroupInviteLastUpdatedByNavigations = new HashSet<GroupInvite>();
+            GroupLastUpatedByNavigations = new HashSet<Group>();
+            GroupMemberCreatedByNavigations = new HashSet<GroupMember>();
+            GroupMemberLastUpdatedByNavigations = new HashSet<GroupMember>();
+            GroupMemberUsers = new HashSet<GroupMember>();
+            GroupSuggestionCreatedByNavigations = new HashSet<GroupSuggestion>();
+            GroupSuggestionLastUpdatedByNavigations = new HashSet<GroupSuggestion>();
             PasswordResets = new HashSet<PasswordReset>();
             UserVerifications = new HashSet<UserVerification>();
         }
@@ -31,6 +40,15 @@ namespace Shufl.Domain.Entities
         public DateTime? LastUpdatedOn { get; set; }
         public Guid? LastUpdatedBy { get; set; }
 
+        public virtual ICollection<Group> GroupCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupInvite> GroupInviteCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupInvite> GroupInviteLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<Group> GroupLastUpatedByNavigations { get; set; }
+        public virtual ICollection<GroupMember> GroupMemberCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupMember> GroupMemberLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<GroupMember> GroupMemberUsers { get; set; }
+        public virtual ICollection<GroupSuggestion> GroupSuggestionCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupSuggestion> GroupSuggestionLastUpdatedByNavigations { get; set; }
         public virtual ICollection<PasswordReset> PasswordResets { get; set; }
         public virtual ICollection<UserVerification> UserVerifications { get; set; }
     }
