@@ -6,6 +6,6 @@ namespace Shufl.Domain.Repositories.User.Interfaces
 {
     public interface IUserVerificationRepository : IRepositoryBase<UserVerification>
     {
-        Task<UserVerification> FetchByIdentifier(string verificationIdentifier);
+        Task<UserVerification> FindByIdentifierAsync(string verificationIdentifier);
     }
 }
