@@ -10,7 +10,7 @@ namespace Shufl.Domain.Repositories.User
     {
         public UserVerificationRepository(ShuflContext context) : base(context) { }
 
-        public async Task<UserVerification> FetchByIdentifier(string verificationIdentifier)
+        public async Task<UserVerification> FindByIdentifierAsync(string verificationIdentifier)
         {
             var userVerification = await _ShuflContext.UserVerifications.Where(uv => 
                 uv.Identifier == verificationIdentifier).FirstOrDefaultAsync();
