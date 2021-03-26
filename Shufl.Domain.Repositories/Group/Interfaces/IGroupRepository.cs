@@ -5,6 +5,6 @@ namespace Shufl.Domain.Repositories.Group.Interfaces
 {
     public interface IGroupRepository : IRepositoryBase<Entities.Group>
     {
-        Task<Entities.Group> GetByIdentifier(string groupIdentifier);
+        Task<Entities.Group> GetByIdentifierAsync(string groupIdentifier);
     }
 }
