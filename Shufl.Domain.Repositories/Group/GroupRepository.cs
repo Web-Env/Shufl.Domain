@@ -23,6 +23,7 @@ namespace Shufl.Domain.Repositories.Group
                 .AsNoTracking()
                 .Where(x => x.Id == groupId)
                 .Include(g => g.CreatedByNavigation)
+                .Include(g => g.GroupMembers).ThenInclude(gm => gm.User)
                 .FirstOrDefaultAsync();
         }
 
@@ -32,6 +33,7 @@ namespace Shufl.Domain.Repositories.Group
                 .AsNoTracking()
                 .Where(x => groupIds.Contains(EF.Property<Guid>(x, "Id")))
                 .Include(g => g.CreatedByNavigation)
+                .Include(g => g.GroupMembers)
                 .ToListAsync();
         }
     }
