@@ -5,6 +5,6 @@ namespace Shufl.Domain.Repositories.Music
 {
     public class GenreRepository : RepositoryBase<Genre>, IGenreRepository
     {
-        public GenreRepository(ShuflDbContext context) : base(context) { }
+        public GenreRepository(ShuflContext context) : base(context) { }
     }
 }

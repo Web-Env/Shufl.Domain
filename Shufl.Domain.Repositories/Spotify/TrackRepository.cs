@@ -5,6 +5,6 @@ namespace Shufl.Domain.Repositories.Spotify
 {
     public class TrackRepository : RepositoryBase<Track>, ITrackRepository
     {
-        public TrackRepository(ShuflDbContext context) : base(context) { }
+        public TrackRepository(ShuflContext context) : base(context) { }
     }
 }
