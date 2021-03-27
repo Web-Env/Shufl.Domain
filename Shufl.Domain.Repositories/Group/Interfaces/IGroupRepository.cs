@@ -9,6 +9,8 @@ namespace Shufl.Domain.Repositories.Group.Interfaces
     {
         Task<Entities.Group> GetByIdentifierAsync(string groupIdentifier);
 
+        Task<Entities.Group> GetByIdForDownloadAsync(Guid groupId);
+
         Task<List<Entities.Group>> GetManyByIdForDownloadAsync(IEnumerable<Guid> ids);
     }
 }

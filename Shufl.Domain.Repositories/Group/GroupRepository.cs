@@ -17,6 +17,14 @@ namespace Shufl.Domain.Repositories.Group
             return await _ShuflContext.Groups.Where(u => u.Identifier == groupIdentifier).FirstOrDefaultAsync();
         }
 
+        public async Task<Entities.Group> GetByIdForDownloadAsync(Guid groupId)
+        {
+            return await _ShuflContext.Groups
+                .Include(g => g.CreatedBy)
+                .Where(x => x.Id == groupId)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<List<Entities.Group>> GetManyByIdForDownloadAsync(IEnumerable<Guid> groupIds)
         {
             return await _ShuflContext.Groups
