@@ -10,21 +10,21 @@ namespace Shufl.Domain.Repositories.Tests
 {
     public static class RepositoryTestHelper
     {
-        public static Mock<ShuflContext> CreateMockContext<T>() where T : class
+        public static Mock<ShuflDbContext> CreateMockContext<T>() where T : class
         {
-            var shuflContextMock = SetupDbContext();
+            var ShuflDbContextMock = SetupDbContext();
             var dbSetMock = SetupDbSetMock<T>();
 
             dbSetMock.Setup(s => s.FindAsync(It.IsAny<Guid>())).Returns(ValueTask.FromResult((T)Activator.CreateInstance(typeof(T))));
 
-            shuflContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
+            ShuflDbContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
 
-            return shuflContextMock;
+            return ShuflDbContextMock;
         }
 
-        public static Mock<ShuflContext> CreateMockContext<T>(IEnumerable<T> entityCollection) where T : class
+        public static Mock<ShuflDbContext> CreateMockContext<T>(IEnumerable<T> entityCollection) where T : class
         {
-            var shuflContextMock = SetupDbContext();
+            var ShuflDbContextMock = SetupDbContext();
             var dbSetMock = SetupDbSetMock<T>();
 
             IQueryable<T> queryableList = entityCollection.AsQueryable();
@@ -34,17 +34,17 @@ namespace Shufl.Domain.Repositories.Tests
             dbSetMock.As<IQueryable<T>>().Setup(x => x.ElementType).Returns(queryableList.ElementType);
             dbSetMock.As<IQueryable<T>>().Setup(x => x.GetEnumerator()).Returns(() => queryableList.GetEnumerator());
 
-            shuflContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
+            ShuflDbContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
 
-            return shuflContextMock;
+            return ShuflDbContextMock;
         }
 
-        private static Mock<ShuflContext> SetupDbContext()
+        private static Mock<ShuflDbContext> SetupDbContext()
         {
-            Mock<ShuflContext> shuflContextMock = new Mock<ShuflContext>(
+            Mock<ShuflDbContext> ShuflDbContextMock = new Mock<ShuflDbContext>(
                 new DbContextOptions<ShuflContext>());
 
-            return shuflContextMock;
+            return ShuflDbContextMock;
         }
 
         private static Mock<DbSet<T>> SetupDbSetMock<T>() where T : class
