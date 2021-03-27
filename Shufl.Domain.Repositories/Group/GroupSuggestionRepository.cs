@@ -5,6 +5,6 @@ namespace Shufl.Domain.Repositories.Group
 {
     public class GroupSuggestionRepository : RepositoryBase<GroupSuggestion>, IGroupSuggestionRepository
     {
-        public GroupSuggestionRepository(ShuflContext context) : base(context) { }
+        public GroupSuggestionRepository(ShuflDbContext context) : base(context) { }
     }
 }

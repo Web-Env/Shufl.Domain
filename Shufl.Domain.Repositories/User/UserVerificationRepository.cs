@@ -8,7 +8,7 @@ namespace Shufl.Domain.Repositories.User
 {
     public class UserVerificationRepository : RepositoryBase<UserVerification>, IUserVerificationRepository
     {
-        public UserVerificationRepository(ShuflContext context) : base(context) { }
+        public UserVerificationRepository(ShuflDbContext context) : base(context) { }
 
         public async Task<UserVerification> FindByIdentifierAsync(string verificationIdentifier)
         {

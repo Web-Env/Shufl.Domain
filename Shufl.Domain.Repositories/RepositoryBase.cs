@@ -11,8 +11,8 @@ namespace Shufl.Domain.Repositories
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected readonly ShuflContext _ShuflContext;
-        public RepositoryBase(ShuflContext context)
+        protected readonly ShuflDbContext _ShuflContext;
+        public RepositoryBase(ShuflDbContext context)
         {
             _ShuflContext = context;
         }

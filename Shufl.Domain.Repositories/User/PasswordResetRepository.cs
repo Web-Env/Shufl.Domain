@@ -8,7 +8,7 @@ namespace Shufl.Domain.Repositories.User
 {
     public class PasswordResetRepository : RepositoryBase<PasswordReset>, IPasswordResetRepository
     {
-        public PasswordResetRepository(ShuflContext context) : base(context) { }
+        public PasswordResetRepository(ShuflDbContext context) : base(context) { }
 
         public async Task<PasswordReset> FetchByIdentifier(string resetIdentifier)
         {
