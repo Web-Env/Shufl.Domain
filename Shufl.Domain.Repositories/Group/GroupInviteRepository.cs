@@ -8,7 +8,7 @@ namespace Shufl.Domain.Repositories.Group
 {
     public class GroupInviteRepository : RepositoryBase<GroupInvite>, IGroupInviteRepository
     {
-        public GroupInviteRepository(ShuflDbContext context) : base(context) { }
+        public GroupInviteRepository(ShuflContext context) : base(context) { }
 
         public async Task<GroupInvite> GetByIdentifierAsync(string groupInviteIdentifier)
         {

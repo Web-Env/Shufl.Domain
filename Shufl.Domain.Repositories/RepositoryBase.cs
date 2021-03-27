@@ -11,20 +11,20 @@ namespace Shufl.Domain.Repositories
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        protected readonly ShuflDbContext _ShuflContext;
-        public RepositoryBase(ShuflDbContext context)
+        protected readonly ShuflContext _ShuflContext;
+        public RepositoryBase(ShuflContext context)
         {
             _ShuflContext = context;
         }
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _ShuflContext.Set<T>().FindAsync(id);
+            return await _ShuflContext.Set<T>().Where(x => id == EF.Property<Guid>(x, "Id")).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<T>> GetManyByIdAsync(IEnumerable<Guid> ids)
         {
-            return await _ShuflContext.Set<T>().Where(x => ids.Contains(EF.Property<Guid>(x, "Id"))).ToListAsync();
+            return await _ShuflContext.Set<T>().Where(x => ids.Contains(EF.Property<Guid>(x, "Id"))).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetPageAsync(int pageNumber, int pageSize)
@@ -34,12 +34,13 @@ namespace Shufl.Domain.Repositories
             return await _ShuflContext.Set<T>()
                 .Skip(offset)
                 .Take(pageSize)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression)
         {
-            return await _ShuflContext.Set<T>().Where(expression).ToListAsync();
+            return await _ShuflContext.Set<T>().Where(expression).AsNoTracking().ToListAsync();
         }
 
         public async Task<T> AddAsync(T entity)

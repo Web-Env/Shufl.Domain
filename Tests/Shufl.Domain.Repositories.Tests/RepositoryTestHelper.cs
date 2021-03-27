@@ -10,19 +10,19 @@ namespace Shufl.Domain.Repositories.Tests
 {
     public static class RepositoryTestHelper
     {
-        public static Mock<ShuflDbContext> CreateMockContext<T>() where T : class
+        public static Mock<ShuflContext> CreateMockContext<T>() where T : class
         {
-            var ShuflDbContextMock = SetupDbContext();
+            var ShuflContextMock = SetupDbContext();
             var dbSetMock = SetupDbSetMock<T>();
 
             dbSetMock.Setup(s => s.FindAsync(It.IsAny<Guid>())).Returns(ValueTask.FromResult((T)Activator.CreateInstance(typeof(T))));
 
-            ShuflDbContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
+            ShuflContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
 
-            return ShuflDbContextMock;
+            return ShuflContextMock;
         }
 
-        public static Mock<ShuflDbContext> CreateMockContext<T>(IEnumerable<T> entityCollection) where T : class
+        public static Mock<ShuflContext> CreateMockContext<T>(IEnumerable<T> entityCollection) where T : class
         {
             var ShuflDbContextMock = SetupDbContext();
             var dbSetMock = SetupDbSetMock<T>();
@@ -39,9 +39,9 @@ namespace Shufl.Domain.Repositories.Tests
             return ShuflDbContextMock;
         }
 
-        private static Mock<ShuflDbContext> SetupDbContext()
+        private static Mock<ShuflContext> SetupDbContext()
         {
-            Mock<ShuflDbContext> ShuflDbContextMock = new Mock<ShuflDbContext>(
+            Mock<ShuflContext> ShuflDbContextMock = new Mock<ShuflContext>(
                 new DbContextOptions<ShuflContext>());
 
             return ShuflDbContextMock;

@@ -8,7 +8,7 @@ namespace Shufl.Domain.Repositories.User
 {
     public class UserRepository : RepositoryBase<Entities.User>, IUserRepository
     {
-        public UserRepository(ShuflDbContext context) : base(context) { }
+        public UserRepository(ShuflContext context) : base(context) { }
 
         public async Task<Entities.User> FindByUsernameAsync(string username)
         {

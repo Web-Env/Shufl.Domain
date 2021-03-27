@@ -5,6 +5,6 @@ namespace Shufl.Domain.Repositories.Spotify
 {
     public class ArtistRepository : RepositoryBase<Artist>, IArtistRepository
     {
-        public ArtistRepository(ShuflDbContext context) : base(context) { }
+        public ArtistRepository(ShuflContext context) : base(context) { }
     }
 }

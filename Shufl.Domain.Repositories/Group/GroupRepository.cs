@@ -10,7 +10,7 @@ namespace Shufl.Domain.Repositories.Group
 {
     public class GroupRepository : RepositoryBase<Entities.Group>, IGroupRepository
     {
-        public GroupRepository(ShuflDbContext context) : base(context) { }
+        public GroupRepository(ShuflContext context) : base(context) { }
 
         public async Task<Entities.Group> GetByIdentifierAsync(string groupIdentifier)
         {

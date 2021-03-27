@@ -28,7 +28,7 @@ namespace Shufl.Domain.Repositories
         public IUserRepository UserRepository { get; private set; }
         public IUserVerificationRepository UserVerificationRepository { get; private set; }
 
-        public RepositoryManager(ShuflDbContext context)
+        public RepositoryManager(ShuflContext context)
         {
             AlbumRepository = new AlbumRepository(context);
             ArtistRepository = new ArtistRepository(context);
