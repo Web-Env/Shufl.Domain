@@ -20,6 +20,7 @@ namespace Shufl.Domain.Repositories.Group
         public async Task<Entities.Group> GetByIdForDownloadAsync(Guid groupId)
         {
             return await _ShuflContext.Groups
+                .AsNoTracking()
                 .Where(x => x.Id == groupId)
                 .Include(g => g.CreatedByNavigation)
                 .FirstOrDefaultAsync();
@@ -28,6 +29,7 @@ namespace Shufl.Domain.Repositories.Group
         public async Task<List<Entities.Group>> GetManyByIdForDownloadAsync(IEnumerable<Guid> groupIds)
         {
             return await _ShuflContext.Groups
+                .AsNoTracking()
                 .Where(x => groupIds.Contains(EF.Property<Guid>(x, "Id")))
                 .Include(g => g.CreatedByNavigation)
                 .ToListAsync();

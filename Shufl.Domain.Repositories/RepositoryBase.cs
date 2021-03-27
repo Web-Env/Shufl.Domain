@@ -19,12 +19,12 @@ namespace Shufl.Domain.Repositories
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _ShuflContext.Set<T>().Where(x => id == EF.Property<Guid>(x, "Id")).AsNoTracking().FirstOrDefaultAsync();
+            return await _ShuflContext.Set<T>().FindAsync(id);
         }
 
         public async Task<IEnumerable<T>> GetManyByIdAsync(IEnumerable<Guid> ids)
         {
-            return await _ShuflContext.Set<T>().Where(x => ids.Contains(EF.Property<Guid>(x, "Id"))).AsNoTracking().ToListAsync();
+            return await _ShuflContext.Set<T>().AsNoTracking().Where(x => ids.Contains(EF.Property<Guid>(x, "Id"))).ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetPageAsync(int pageNumber, int pageSize)
