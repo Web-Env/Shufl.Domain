@@ -9,6 +9,6 @@ namespace Shufl.Domain.Repositories.Spotify.Interfaces
     {
         Task<Genre> GetByCodeAsync(string code);
 
-        Task<IEnumerable<Genre>> GetManyByCodeAsync(IEnumerable<string> codes)
+        Task<IEnumerable<Genre>> GetManyByCodeAsync(IEnumerable<string> codes);
     }
 }
