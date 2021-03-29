@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shufl.Domain.Entities;
 using Shufl.Domain.Repositories.Spotify.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +29,12 @@ namespace Shufl.Domain.Repositories.Spotify
                         .ThenInclude(a => a.AlbumImages)
                 .Include(a => a.ArtistGenres)
                     .ThenInclude(ag => ag.Genre)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Artist> GetManyBySpotifyIdsAsync(IEnumerable<string> spotifyId)
+        {
+            return await _ShuflContext.Artists.Where(a => spotifyId.Contains(a.SpotifyId))
                 .FirstOrDefaultAsync();
         }
     }
