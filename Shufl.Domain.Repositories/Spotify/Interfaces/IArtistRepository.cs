@@ -6,6 +6,6 @@ namespace Shufl.Domain.Repositories.Spotify.Interfaces
 {
     public interface IArtistRepository : ISpotifyRepositoryBase<Artist>
     {
-        Task<Artist> GetManyBySpotifyIdsAsync(IEnumerable<string> spotifyId);
+        Task<IEnumerable<Artist>> GetManyBySpotifyIdsAsync(IEnumerable<string> spotifyId);
     }
 }

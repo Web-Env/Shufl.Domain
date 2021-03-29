@@ -32,10 +32,10 @@ namespace Shufl.Domain.Repositories.Spotify
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Artist> GetManyBySpotifyIdsAsync(IEnumerable<string> spotifyId)
+        public async Task<IEnumerable<Artist>> GetManyBySpotifyIdsAsync(IEnumerable<string> spotifyId)
         {
             return await _ShuflContext.Artists.Where(a => spotifyId.Contains(a.SpotifyId))
-                .FirstOrDefaultAsync();
+                .ToListAsync();
         }
     }
 }
