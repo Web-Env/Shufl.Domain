@@ -9,15 +9,17 @@ namespace Shufl.Domain.Entities
     {
         public Artist()
         {
-            Albums = new HashSet<Album>();
+            AlbumArtists = new HashSet<AlbumArtist>();
+            ArtistImages = new HashSet<ArtistImage>();
+            TrackArtists = new HashSet<TrackArtist>();
         }
 
         public Guid Id { get; set; }
         public string SpotifyId { get; set; }
         public string Name { get; set; }
-        public string SmallIcon { get; set; }
-        public string LargeIcon { get; set; }
 
-        public virtual ICollection<Album> Albums { get; set; }
+        public virtual ICollection<AlbumArtist> AlbumArtists { get; set; }
+        public virtual ICollection<ArtistImage> ArtistImages { get; set; }
+        public virtual ICollection<TrackArtist> TrackArtists { get; set; }
     }
 }

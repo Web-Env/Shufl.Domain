@@ -7,6 +7,11 @@ namespace Shufl.Domain.Entities
 {
     public partial class Track
     {
+        public Track()
+        {
+            TrackArtists = new HashSet<TrackArtist>();
+        }
+
         public Guid Id { get; set; }
         public string SpotifyId { get; set; }
         public Guid AlbumId { get; set; }
@@ -16,5 +21,6 @@ namespace Shufl.Domain.Entities
         public int Duration { get; set; }
 
         public virtual Album Album { get; set; }
+        public virtual ICollection<TrackArtist> TrackArtists { get; set; }
     }
 }

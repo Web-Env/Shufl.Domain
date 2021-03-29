@@ -18,8 +18,11 @@ namespace Shufl.Domain.Entities
         }
 
         public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<AlbumArtist> AlbumArtists { get; set; }
+        public virtual DbSet<AlbumImage> AlbumImages { get; set; }
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<ArtistGenre> ArtistGenres { get; set; }
+        public virtual DbSet<ArtistImage> ArtistImages { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupInvite> GroupInvites { get; set; }
@@ -28,6 +31,7 @@ namespace Shufl.Domain.Entities
         public virtual DbSet<GroupSuggestionRating> GroupSuggestionRatings { get; set; }
         public virtual DbSet<PasswordReset> PasswordResets { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
+        public virtual DbSet<TrackArtist> TrackArtists { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserVerification> UserVerifications { get; set; }
 
@@ -48,8 +52,6 @@ namespace Shufl.Domain.Entities
             {
                 entity.ToTable("Album");
 
-                entity.HasIndex(e => e.ArtistId, "IX_Album_ArtistId");
-
                 entity.HasIndex(e => e.Name, "IX_Album_Name");
 
                 entity.HasIndex(e => e.SpotifyId, "IX_Album_SpotifyId")
@@ -57,11 +59,9 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.LargeIcon)
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -69,23 +69,62 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.ReleaseDate).HasColumnType("datetime");
 
-                entity.Property(e => e.SmallIcon)
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
                 entity.Property(e => e.SpotifyId)
                     .IsRequired()
                     .HasMaxLength(22)
                     .IsUnicode(false)
                     .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<AlbumArtist>(entity =>
+            {
+                entity.ToTable("AlbumArtist");
+
+                entity.HasIndex(e => e.AlbumId, "IX_AlbumArtist_AlbumId");
+
+                entity.HasIndex(e => new { e.AlbumId, e.ArtistId }, "IX_AlbumArtist_AlbumId_ArtistId")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.ArtistId, "IX_AlbumArtist_ArtistId");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Album)
+                    .WithMany(p => p.AlbumArtists)
+                    .HasForeignKey(d => d.AlbumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AlbumArtist_Album");
 
                 entity.HasOne(d => d.Artist)
-                    .WithMany(p => p.Albums)
+                    .WithMany(p => p.AlbumArtists)
                     .HasForeignKey(d => d.ArtistId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Album_Artist");
+                    .HasConstraintName("FK_AlbumArtist_Artist");
+            });
+
+            modelBuilder.Entity<AlbumImage>(entity =>
+            {
+                entity.ToTable("AlbumImage");
+
+                entity.HasIndex(e => e.AlbumId, "IX_AlbumImage_AlbumId");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Uri)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.Album)
+                    .WithMany(p => p.AlbumImages)
+                    .HasForeignKey(d => d.AlbumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AlbumImage_Album");
             });
 
             modelBuilder.Entity<Artist>(entity =>
@@ -99,21 +138,9 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.LargeIcon)
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(150);
-
-                entity.Property(e => e.SmallIcon)
-                    .IsRequired()
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
 
                 entity.Property(e => e.SpotifyId)
                     .IsRequired()
@@ -133,9 +160,33 @@ namespace Shufl.Domain.Entities
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
             });
 
+            modelBuilder.Entity<ArtistImage>(entity =>
+            {
+                entity.ToTable("ArtistImage");
+
+                entity.HasIndex(e => e.ArtistId, "IX_ArtistImage_ArtistId");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Uri)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.Artist)
+                    .WithMany(p => p.ArtistImages)
+                    .HasForeignKey(d => d.ArtistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ArtistImage_Artist");
+            });
+
             modelBuilder.Entity<Genre>(entity =>
             {
                 entity.ToTable("Genre");
+
+                entity.HasIndex(e => e.Code, "IX_Genre_Code")
+                    .IsUnique();
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
@@ -305,11 +356,11 @@ namespace Shufl.Domain.Entities
 
             modelBuilder.Entity<GroupSuggestionRating>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("GroupSuggestionRating");
 
                 entity.HasIndex(e => e.GroupSuggestionId, "IX_GroupSuggestionRating");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
                 entity.Property(e => e.Comment)
                     .IsRequired()
@@ -317,23 +368,21 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
-
                 entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
 
                 entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany()
+                    .WithMany(p => p.GroupSuggestionRatingCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.GroupSuggestion)
-                    .WithMany()
+                    .WithMany(p => p.GroupSuggestionRatings)
                     .HasForeignKey(d => d.GroupSuggestionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_GroupSuggestionRating_GroupSuggestion");
 
                 entity.HasOne(d => d.LastUpdatedByNavigation)
-                    .WithMany()
+                    .WithMany(p => p.GroupSuggestionRatingLastUpdatedByNavigations)
                     .HasForeignKey(d => d.LastUpdatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
@@ -341,6 +390,9 @@ namespace Shufl.Domain.Entities
             modelBuilder.Entity<PasswordReset>(entity =>
             {
                 entity.ToTable("PasswordReset");
+
+                entity.HasIndex(e => e.Identifier, "IX_PasswordReset_Identifier")
+                    .IsUnique();
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
@@ -386,8 +438,6 @@ namespace Shufl.Domain.Entities
             {
                 entity.ToTable("Track");
 
-                entity.HasIndex(e => e.AlbumId, "IX_Track_AlbumId");
-
                 entity.HasIndex(e => e.Name, "IX_Track_Name");
 
                 entity.HasIndex(e => e.SpotifyId, "IX_Track_SpotifyId")
@@ -410,6 +460,36 @@ namespace Shufl.Domain.Entities
                     .HasForeignKey(d => d.AlbumId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Track_Album");
+            });
+
+            modelBuilder.Entity<TrackArtist>(entity =>
+            {
+                entity.ToTable("TrackArtist");
+
+                entity.HasIndex(e => e.ArtistId, "IX_TrackArtist_ArtistId");
+
+                entity.HasIndex(e => e.TrackId, "IX_TrackArtist_TrackId");
+
+                entity.HasIndex(e => new { e.TrackId, e.ArtistId }, "IX_TrackArtist_TrackId_ArtistId")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Artist)
+                    .WithMany(p => p.TrackArtists)
+                    .HasForeignKey(d => d.ArtistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TrackArtist_Artist");
+
+                entity.HasOne(d => d.Track)
+                    .WithMany(p => p.TrackArtists)
+                    .HasForeignKey(d => d.TrackId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TrackArtist_Track");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -483,7 +563,7 @@ namespace Shufl.Domain.Entities
             {
                 entity.ToTable("UserVerification");
 
-                entity.HasIndex(e => e.Identifier, "IX_UserVerification")
+                entity.HasIndex(e => e.Identifier, "IX_UserVerification_Identifier")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
