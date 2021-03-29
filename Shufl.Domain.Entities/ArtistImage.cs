@@ -5,13 +5,14 @@ using System.Collections.Generic;
 
 namespace Shufl.Domain.Entities
 {
-    public partial class ArtistGenre
+    public partial class ArtistImage
     {
         public Guid Id { get; set; }
         public Guid ArtistId { get; set; }
-        public Guid GenreId { get; set; }
+        public short Width { get; set; }
+        public short Height { get; set; }
+        public string Uri { get; set; }
 
         public virtual Artist Artist { get; set; }
-        public virtual Genre Genre { get; set; }
     }
 }
