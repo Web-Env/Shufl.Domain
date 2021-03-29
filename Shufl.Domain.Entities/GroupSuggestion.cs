@@ -14,6 +14,7 @@ namespace Shufl.Domain.Entities
 
         public Guid Id { get; set; }
         public Guid GroupId { get; set; }
+        public string Identifier { get; set; }
         public bool? IsRandom { get; set; }
         public Guid AlbumId { get; set; }
         public DateTime CreatedOn { get; set; }
