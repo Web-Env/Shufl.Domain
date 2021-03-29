@@ -270,9 +270,18 @@ namespace Shufl.Domain.Entities
 
                 entity.HasIndex(e => new { e.GroupId, e.AlbumId }, "IX_GroupSuggestion_GroupId_AlbumId");
 
+                entity.HasIndex(e => new { e.GroupId, e.Identifier }, "IX_GroupSuggestion_GroupId_Identifier")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasMaxLength(24)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.IsRandom)
                     .IsRequired()
