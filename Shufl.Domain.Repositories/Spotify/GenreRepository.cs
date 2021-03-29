@@ -20,5 +20,10 @@ namespace Shufl.Domain.Repositories.Spotify
         {
             return await _ShuflContext.Genres.Where(g => codes.Contains(g.Code)).ToListAsync();
         }
+
+        public async Task<IEnumerable<string>> GetManyCodesByCodeAsync(IEnumerable<string> codes)
+        {
+            return await _ShuflContext.Genres.Where(g => codes.Contains(g.Code)).Select(g => g.Code).ToListAsync();
+        }
     }
 }
