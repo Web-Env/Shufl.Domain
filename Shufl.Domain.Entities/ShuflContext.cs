@@ -153,11 +153,22 @@ namespace Shufl.Domain.Entities
             {
                 entity.ToTable("ArtistGenre");
 
-                entity.HasIndex(e => e.ArtistId, "IX_ArtistGenre_ArtistId");
-
-                entity.HasIndex(e => e.GenreId, "IX_ArtistGenre_GenreId");
+                entity.HasIndex(e => new { e.ArtistId, e.GenreId }, "IX_ArtistGenre_ArtistId_GenreId")
+                    .IsUnique();
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.HasOne(d => d.Artist)
+                    .WithMany(p => p.ArtistGenres)
+                    .HasForeignKey(d => d.ArtistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ArtistGenre_Artist");
+
+                entity.HasOne(d => d.Genre)
+                    .WithMany(p => p.ArtistGenres)
+                    .HasForeignKey(d => d.GenreId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ArtistGenre_Genre");
             });
 
             modelBuilder.Entity<ArtistImage>(entity =>

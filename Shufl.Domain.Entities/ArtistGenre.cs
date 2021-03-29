@@ -10,5 +10,8 @@ namespace Shufl.Domain.Entities
         public Guid Id { get; set; }
         public Guid ArtistId { get; set; }
         public Guid GenreId { get; set; }
+
+        public virtual Artist Artist { get; set; }
+        public virtual Genre Genre { get; set; }
     }
 }

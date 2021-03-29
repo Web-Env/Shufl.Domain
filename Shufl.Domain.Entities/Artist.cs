@@ -10,6 +10,7 @@ namespace Shufl.Domain.Entities
         public Artist()
         {
             AlbumArtists = new HashSet<AlbumArtist>();
+            ArtistGenres = new HashSet<ArtistGenre>();
             ArtistImages = new HashSet<ArtistImage>();
             TrackArtists = new HashSet<TrackArtist>();
         }
@@ -19,6 +20,7 @@ namespace Shufl.Domain.Entities
         public string Name { get; set; }
 
         public virtual ICollection<AlbumArtist> AlbumArtists { get; set; }
+        public virtual ICollection<ArtistGenre> ArtistGenres { get; set; }
         public virtual ICollection<ArtistImage> ArtistImages { get; set; }
         public virtual ICollection<TrackArtist> TrackArtists { get; set; }
     }
