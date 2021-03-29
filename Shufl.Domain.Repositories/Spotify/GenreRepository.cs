@@ -1,7 +1,7 @@
 ﻿using Shufl.Domain.Entities;
-using Shufl.Domain.Repositories.Music.Interfaces;
+using Shufl.Domain.Repositories.Spotify.Interfaces;
 
-namespace Shufl.Domain.Repositories.Music
+namespace Shufl.Domain.Repositories.Spotify
 {
     public class GenreRepository : RepositoryBase<Genre>, IGenreRepository
     {
