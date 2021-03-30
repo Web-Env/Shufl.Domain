@@ -14,8 +14,14 @@ namespace Shufl.Domain.Repositories.Group
 
         public async Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId)
         {
-            return await _ShuflContext.GroupSuggestions.Where(gs =>
-                gs.GroupId == groupId).ToListAsync();
+            return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
+                .Include(gs => gs.Album)
+                    .ThenInclude(a => a.AlbumArtists)
+                        .ThenInclude(aa => aa.Artist)
+                            .ThenInclude(a => a.ArtistGenres)
+                                .ThenInclude(ag => ag.Genre)
+                .Include(gs => gs.CreatedByNavigation)
+                .ToListAsync();
         }
 
         public async Task<GroupSuggestion> GetByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId)
