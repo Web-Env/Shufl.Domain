@@ -19,7 +19,7 @@ namespace Shufl.Domain.Entities
         public string SpotifyId { get; set; }
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public bool Type { get; set; }
+        public byte Type { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime LastUpdatedOn { get; set; }
 
