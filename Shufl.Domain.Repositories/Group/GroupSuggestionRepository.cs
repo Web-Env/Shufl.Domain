@@ -25,6 +25,7 @@ namespace Shufl.Domain.Repositories.Group
                 .Include(gs => gs.GroupSuggestionRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
                 .Include(gs => gs.CreatedByNavigation)
+                .OrderByDescending(gs => gs.CreatedOn)
                 .AsNoTracking()
                 .ToListAsync();
         }
