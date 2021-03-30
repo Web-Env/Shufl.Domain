@@ -21,6 +21,7 @@ namespace Shufl.Domain.Repositories.Group
                             .ThenInclude(a => a.ArtistGenres)
                                 .ThenInclude(ag => ag.Genre)
                 .Include(gs => gs.CreatedByNavigation)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -35,6 +36,7 @@ namespace Shufl.Domain.Repositories.Group
                 .Include(gs => gs.GroupSuggestionRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
                 .Include(gs => gs.CreatedByNavigation)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
