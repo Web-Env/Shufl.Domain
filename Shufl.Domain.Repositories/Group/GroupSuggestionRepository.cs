@@ -24,6 +24,20 @@ namespace Shufl.Domain.Repositories.Group
                 .ToListAsync();
         }
 
+        public async Task<GroupSuggestion> GetByIdentifierAsync(string groupSuggestionIdentifier)
+        {
+            return await _ShuflContext.GroupSuggestions.Where(gs => gs.Identifier == groupSuggestionIdentifier)
+                .Include(gs => gs.Album)
+                    .ThenInclude(a => a.AlbumArtists)
+                        .ThenInclude(aa => aa.Artist)
+                            .ThenInclude(a => a.ArtistGenres)
+                                .ThenInclude(ag => ag.Genre)
+                .Include(gs => gs.GroupSuggestionRatings)
+                    .ThenInclude(gsr => gsr.CreatedByNavigation)
+                .Include(gs => gs.CreatedByNavigation)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<GroupSuggestion> GetByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId)
         {
             return await _ShuflContext.GroupSuggestions.Where(gs =>
