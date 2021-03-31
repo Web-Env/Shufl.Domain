@@ -10,8 +10,8 @@ namespace Shufl.Domain.Repositories.Group.Interfaces
     {
         Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId);
 
-        Task<GroupSuggestion> GetByIdentifierAsync(string groupSuggestionIdentifier);
+        Task<GroupSuggestion> GetByIdentifierAndGroupIdentifierAsync(string groupSuggestionIdentifier, string groupIdentifier);
 
-        Task<GroupSuggestion> GetByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId);
+        Task<GroupSuggestion> CheckExistsByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId);
     }
 }
