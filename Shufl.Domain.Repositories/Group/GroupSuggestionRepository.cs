@@ -30,9 +30,9 @@ namespace Shufl.Domain.Repositories.Group
                 .ToListAsync();
         }
 
-        public async Task<GroupSuggestion> GetByIdentifierAndGroupIdentifierAsync(string groupSuggestionIdentifier, string groupIdentifier)
+        public async Task<GroupSuggestion> GetByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId)
         {
-            return await _ShuflContext.GroupSuggestions.Where(gs => gs.Identifier == groupSuggestionIdentifier && gs.Group.Identifier == groupIdentifier)
+            return await _ShuflContext.GroupSuggestions.Where(gs => gs.Identifier == groupSuggestionIdentifier && gs.Group.Id == groupId)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumArtists)
                         .ThenInclude(aa => aa.Artist)
