@@ -583,6 +583,11 @@ namespace Shufl.Domain.Entities
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.UserSecret)
+                    .HasMaxLength(344)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(100)
