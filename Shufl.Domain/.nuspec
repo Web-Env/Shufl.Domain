@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Shufl.Domain</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>Domain logic for the Shufl APIs</description>
     <authors>Adam Barry-O'Donovan</authors>
     <projectUrl>https://github.com/Web-Env/Shufl.Domain</projectUrl>
