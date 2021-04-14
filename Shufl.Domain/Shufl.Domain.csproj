@@ -6,6 +6,7 @@
     <Authors>Adam Barry-O'Donovan</Authors>
     <Company>WebEnv</Company>
     <Description>Domain logic for the Shufl APIs</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
