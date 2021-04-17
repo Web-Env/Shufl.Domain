@@ -593,8 +593,6 @@ namespace Shufl.Domain.Entities
 
             modelBuilder.Entity<UserImage>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("UserImage");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
@@ -606,7 +604,7 @@ namespace Shufl.Domain.Entities
                     .IsFixedLength(true);
 
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.UserImages)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserImage_User");

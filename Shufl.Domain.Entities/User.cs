@@ -20,6 +20,7 @@ namespace Shufl.Domain.Entities
             GroupSuggestionLastUpdatedByNavigations = new HashSet<GroupSuggestion>();
             GroupSuggestionRatingCreatedByNavigations = new HashSet<GroupSuggestionRating>();
             GroupSuggestionRatingLastUpdatedByNavigations = new HashSet<GroupSuggestionRating>();
+            UserImages = new HashSet<UserImage>();
             UserVerifications = new HashSet<UserVerification>();
         }
 
@@ -52,6 +53,7 @@ namespace Shufl.Domain.Entities
         public virtual ICollection<GroupSuggestion> GroupSuggestionLastUpdatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingCreatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<UserImage> UserImages { get; set; }
         public virtual ICollection<UserVerification> UserVerifications { get; set; }
     }
 }
