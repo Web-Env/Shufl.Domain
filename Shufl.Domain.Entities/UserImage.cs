@@ -9,8 +9,8 @@ namespace Shufl.Domain.Entities
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public short Width { get; set; }
-        public short Height { get; set; }
+        public short? Width { get; set; }
+        public short? Height { get; set; }
         public string Uri { get; set; }
 
         public virtual User User { get; set; }
