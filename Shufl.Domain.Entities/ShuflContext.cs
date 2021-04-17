@@ -33,6 +33,7 @@ namespace Shufl.Domain.Entities
         public virtual DbSet<Track> Tracks { get; set; }
         public virtual DbSet<TrackArtist> TrackArtists { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserImage> UserImages { get; set; }
         public virtual DbSet<UserVerification> UserVerifications { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -382,9 +383,7 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.Comment)
-                    .IsRequired()
-                    .HasMaxLength(1500);
+                entity.Property(e => e.Comment).HasMaxLength(1500);
 
                 entity.Property(e => e.CompositionRating).HasColumnType("decimal(3, 1)");
 
@@ -571,19 +570,17 @@ namespace Shufl.Domain.Entities
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.SpotifyToken)
-                    .HasMaxLength(264)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.SpotifyUrl)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
+                entity.Property(e => e.SpotifyRefreshToken)
+                    .HasMaxLength(344)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
 
                 entity.Property(e => e.SpotifyUsername)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.UserSecret)
+                    .IsRequired()
                     .HasMaxLength(344)
                     .IsUnicode(false)
                     .IsFixedLength(true);
@@ -592,6 +589,27 @@ namespace Shufl.Domain.Entities
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserImage>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("UserImage");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Uri)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.User)
+                    .WithMany()
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserImage_User");
             });
 
             modelBuilder.Entity<UserVerification>(entity =>

@@ -34,9 +34,8 @@ namespace Shufl.Domain.Entities
         public string UserSecret { get; set; }
         public bool IsVerified { get; set; }
         public bool IsAdmin { get; set; }
-        public string SpotifyToken { get; set; }
+        public string SpotifyRefreshToken { get; set; }
         public string SpotifyUsername { get; set; }
-        public string SpotifyUrl { get; set; }
         public string SpotifyMarket { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
