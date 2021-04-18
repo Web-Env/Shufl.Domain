@@ -24,9 +24,7 @@ namespace Shufl.Domain.Repositories.Group
                     .ThenInclude(a => a.AlbumImages)
                 .Include(gs => gs.GroupSuggestionRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
-                        .ThenInclude(u => u.UserImages)
                 .Include(gs => gs.CreatedByNavigation)
-                    .ThenInclude(u => u.UserImages)
                 .OrderByDescending(gs => gs.CreatedOn)
                 .AsNoTracking()
                 .ToListAsync();
@@ -44,7 +42,6 @@ namespace Shufl.Domain.Repositories.Group
                     .ThenInclude(a => a.AlbumImages)
                 .Include(gs => gs.GroupSuggestionRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
-                        .ThenInclude(u => u.UserImages)
                 .Include(gs => gs.CreatedByNavigation)
                     .ThenInclude(u => u.UserImages)
                 .AsNoTracking()
