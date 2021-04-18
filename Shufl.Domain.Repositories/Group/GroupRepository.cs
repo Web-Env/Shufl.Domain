@@ -23,7 +23,7 @@ namespace Shufl.Domain.Repositories.Group
                 .AsNoTracking()
                 .Where(x => x.Id == groupId)
                 .Include(g => g.CreatedByNavigation)
-                .Include(g => g.GroupMembers).ThenInclude(gm => gm.User)
+                .Include(g => g.GroupMembers).ThenInclude(gm => gm.User).ThenInclude(u => u.UserImages)
                 .FirstOrDefaultAsync();
         }
 

@@ -559,12 +559,6 @@ namespace Shufl.Domain.Entities
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.PictureUrl)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('https://shufl.webenv.io/assets/img/blank-user.png')");
-
                 entity.Property(e => e.SpotifyMarket)
                     .HasMaxLength(2)
                     .IsUnicode(false)
