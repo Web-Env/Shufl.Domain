@@ -12,9 +12,13 @@ namespace Shufl.Domain.Repositories.Group
     {
         public GroupSuggestionRepository(ShuflContext context) : base(context) { }
 
-        public async Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId)
+        public async Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId, int page, int pageSize)
         {
+            var offset = page > 0 ? pageSize * (page - 1) : 0;
+
             return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
+                .Take(page)
+                .Skip(offset)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumArtists)
                         .ThenInclude(aa => aa.Artist)
