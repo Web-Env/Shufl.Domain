@@ -19,6 +19,7 @@ namespace Shufl.Domain.Repositories.Group
             return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
                 .Skip(offset)
                 .Take(pageSize)
+                .OrderByDescending(gs => gs.CreatedOn)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumArtists)
                         .ThenInclude(aa => aa.Artist)
@@ -30,7 +31,6 @@ namespace Shufl.Domain.Repositories.Group
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
                 .Include(gs => gs.CreatedByNavigation)
                     .ThenInclude(u => u.UserImages)
-                .OrderByDescending(gs => gs.CreatedOn)
                 .AsSplitQuery()
                 .AsNoTracking()
                 .ToListAsync();
