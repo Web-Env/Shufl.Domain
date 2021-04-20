@@ -17,7 +17,7 @@ namespace Shufl.Domain.Repositories.Group
             var offset = page > 0 ? pageSize * (page - 1) : 0;
 
             return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
-                .Take(page)
+                .Take(pageSize)
                 .Skip(offset)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumArtists)
