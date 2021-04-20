@@ -14,7 +14,7 @@ namespace Shufl.Domain.Repositories.Group
 
         public async Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId, int page, int pageSize)
         {
-            var offset = page > 0 ? pageSize * (page - 1) : 0;
+            var offset = pageSize * page;
 
             return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
                 .Take(pageSize)
