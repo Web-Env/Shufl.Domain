@@ -2,8 +2,6 @@
 using Moq;
 using Shufl.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shufl.Domain.Repositories.Tests
@@ -20,23 +18,6 @@ namespace Shufl.Domain.Repositories.Tests
             ShuflContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
 
             return ShuflContextMock;
-        }
-
-        public static Mock<ShuflContext> CreateMockContext<T>(IEnumerable<T> entityCollection) where T : class
-        {
-            var ShuflDbContextMock = SetupDbContext();
-            var dbSetMock = SetupDbSetMock<T>();
-
-            IQueryable<T> queryableList = entityCollection.AsQueryable();
-
-            dbSetMock.As<IQueryable<T>>().Setup(x => x.Provider).Returns(queryableList.Provider);
-            dbSetMock.As<IQueryable<T>>().Setup(x => x.Expression).Returns(queryableList.Expression);
-            dbSetMock.As<IQueryable<T>>().Setup(x => x.ElementType).Returns(queryableList.ElementType);
-            dbSetMock.As<IQueryable<T>>().Setup(x => x.GetEnumerator()).Returns(() => queryableList.GetEnumerator());
-
-            ShuflDbContextMock.Setup(s => s.Set<T>()).Returns(dbSetMock.Object);
-
-            return ShuflDbContextMock;
         }
 
         private static Mock<ShuflContext> SetupDbContext()
