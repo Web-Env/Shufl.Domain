@@ -534,8 +534,7 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.DisplayName)
                     .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -543,13 +542,11 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
 
