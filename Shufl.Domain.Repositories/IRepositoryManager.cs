@@ -39,6 +39,8 @@ namespace Shufl.Domain.Repositories.Interfaces
 
         IUserRepository UserRepository { get; }
 
+        IUserImageRepository UserImageRepository { get; }
+
         IUserVerificationRepository UserVerificationRepository { get; }
     }
 }

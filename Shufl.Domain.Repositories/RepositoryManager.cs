@@ -28,6 +28,7 @@ namespace Shufl.Domain.Repositories
         public ITrackRepository TrackRepository { get; }
         public ITrackArtistRepository TrackArtistRepository { get; }
         public IUserRepository UserRepository { get; private set; }
+        public IUserImageRepository UserImageRepository { get; private set; }
         public IUserVerificationRepository UserVerificationRepository { get; private set; }
 
         public RepositoryManager(ShuflContext context)
@@ -48,6 +49,7 @@ namespace Shufl.Domain.Repositories
             TrackRepository = new TrackRepository(context);
             TrackArtistRepository = new TrackArtistRepository(context);
             UserRepository = new UserRepository(context);
+            UserImageRepository = new UserImageRepository(context);
             UserVerificationRepository = new UserVerificationRepository(context);
         }
 
