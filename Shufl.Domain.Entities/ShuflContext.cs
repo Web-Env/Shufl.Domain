@@ -385,8 +385,6 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.Comment).HasMaxLength(1500);
 
-                entity.Property(e => e.CompositionRating).HasColumnType("decimal(3, 1)");
-
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.InstrumentalsRating).HasColumnType("decimal(3, 1)");
@@ -396,6 +394,8 @@ namespace Shufl.Domain.Entities
                 entity.Property(e => e.LyricsRating).HasColumnType("decimal(3, 1)");
 
                 entity.Property(e => e.OverallRating).HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.StructureRating).HasColumnType("decimal(3, 1)");
 
                 entity.Property(e => e.VocalsRating).HasColumnType("decimal(3, 1)");
 
