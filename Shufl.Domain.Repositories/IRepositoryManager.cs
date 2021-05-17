@@ -27,11 +27,19 @@ namespace Shufl.Domain.Repositories.Interfaces
 
         IGroupMemberRepository GroupMemberRepository { get; }
 
+        IGroupPlaylistRepository GroupPlaylistRepository { get; }
+
+        IGroupPlaylistRatingRepository GroupPlaylistRatingRepository { get; }
+
         IGroupSuggestionRepository GroupSuggestionRepository { get; }
 
         IGroupSuggestionRatingRepository GroupSuggestionRatingRepository { get; }
 
         IPasswordResetRepository PasswordResetRepository { get; }
+
+        IPlaylistRepository PlaylistRepository { get; }
+
+        IPlaylistImageRepository PlaylistImageRepository { get; }
 
         ITrackRepository TrackRepository { get; }
 
