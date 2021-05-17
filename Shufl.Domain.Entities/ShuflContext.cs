@@ -27,9 +27,13 @@ namespace Shufl.Domain.Entities
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupInvite> GroupInvites { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
+        public virtual DbSet<GroupPlaylist> GroupPlaylists { get; set; }
+        public virtual DbSet<GroupPlaylistRating> GroupPlaylistRatings { get; set; }
         public virtual DbSet<GroupSuggestion> GroupSuggestions { get; set; }
         public virtual DbSet<GroupSuggestionRating> GroupSuggestionRatings { get; set; }
         public virtual DbSet<PasswordReset> PasswordResets { get; set; }
+        public virtual DbSet<Playlist> Playlists { get; set; }
+        public virtual DbSet<PlaylistImage> PlaylistImages { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
         public virtual DbSet<TrackArtist> TrackArtists { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -327,6 +331,83 @@ namespace Shufl.Domain.Entities
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
+            modelBuilder.Entity<GroupPlaylist>(entity =>
+            {
+                entity.ToTable("GroupPlaylist");
+
+                entity.HasIndex(e => new { e.GroupId, e.Identifier }, "IX_GroupPlaylist_GroupId_Identifier")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.GroupId, e.PlaylistId }, "IX_GroupPlaylist_GroupId_PlaylistId");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasMaxLength(24)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.GroupPlaylistCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.GroupPlaylists)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupPlaylist_Group");
+
+                entity.HasOne(d => d.LastUpdatedByNavigation)
+                    .WithMany(p => p.GroupPlaylistLastUpdatedByNavigations)
+                    .HasForeignKey(d => d.LastUpdatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Playlist)
+                    .WithMany(p => p.GroupPlaylists)
+                    .HasForeignKey(d => d.PlaylistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupPlaylist_Playlist");
+            });
+
+            modelBuilder.Entity<GroupPlaylistRating>(entity =>
+            {
+                entity.ToTable("GroupPlaylistRating");
+
+                entity.HasIndex(e => e.GroupPlaylistId, "IX_GroupPlaylistRating_GroupPlaylistId");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Comment).HasMaxLength(1500);
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.OverallRating).HasColumnType("decimal(3, 1)");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.GroupPlaylistRatingCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.GroupPlaylist)
+                    .WithMany(p => p.GroupPlaylistRatings)
+                    .HasForeignKey(d => d.GroupPlaylistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupPlaylistRating_GroupPlaylist");
+
+                entity.HasOne(d => d.LastUpdatedByNavigation)
+                    .WithMany(p => p.GroupPlaylistRatingLastUpdatedByNavigations)
+                    .HasForeignKey(d => d.LastUpdatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<GroupSuggestion>(entity =>
             {
                 entity.ToTable("GroupSuggestion");
@@ -461,6 +542,59 @@ namespace Shufl.Domain.Entities
                     .HasMaxLength(344)
                     .IsUnicode(false)
                     .IsFixedLength(true);
+            });
+
+            modelBuilder.Entity<Playlist>(entity =>
+            {
+                entity.ToTable("Playlist");
+
+                entity.HasIndex(e => e.SpotifyId, "IX_Playlist_SpotifyId")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.SpotifyId)
+                    .IsRequired()
+                    .HasMaxLength(22)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.PlaylistCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.LastUpdatedByNavigation)
+                    .WithMany(p => p.PlaylistLastUpdatedByNavigations)
+                    .HasForeignKey(d => d.LastUpdatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<PlaylistImage>(entity =>
+            {
+                entity.ToTable("PlaylistImage");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Uri)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.Playlist)
+                    .WithMany(p => p.PlaylistImages)
+                    .HasForeignKey(d => d.PlaylistId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PlaylistImage_Playlist");
             });
 
             modelBuilder.Entity<Track>(entity =>

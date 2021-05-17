@@ -16,10 +16,16 @@ namespace Shufl.Domain.Entities
             GroupMemberCreatedByNavigations = new HashSet<GroupMember>();
             GroupMemberLastUpdatedByNavigations = new HashSet<GroupMember>();
             GroupMemberUsers = new HashSet<GroupMember>();
+            GroupPlaylistCreatedByNavigations = new HashSet<GroupPlaylist>();
+            GroupPlaylistLastUpdatedByNavigations = new HashSet<GroupPlaylist>();
+            GroupPlaylistRatingCreatedByNavigations = new HashSet<GroupPlaylistRating>();
+            GroupPlaylistRatingLastUpdatedByNavigations = new HashSet<GroupPlaylistRating>();
             GroupSuggestionCreatedByNavigations = new HashSet<GroupSuggestion>();
             GroupSuggestionLastUpdatedByNavigations = new HashSet<GroupSuggestion>();
             GroupSuggestionRatingCreatedByNavigations = new HashSet<GroupSuggestionRating>();
             GroupSuggestionRatingLastUpdatedByNavigations = new HashSet<GroupSuggestionRating>();
+            PlaylistCreatedByNavigations = new HashSet<Playlist>();
+            PlaylistLastUpdatedByNavigations = new HashSet<Playlist>();
             UserImages = new HashSet<UserImage>();
             UserVerifications = new HashSet<UserVerification>();
         }
@@ -48,10 +54,16 @@ namespace Shufl.Domain.Entities
         public virtual ICollection<GroupMember> GroupMemberCreatedByNavigations { get; set; }
         public virtual ICollection<GroupMember> GroupMemberLastUpdatedByNavigations { get; set; }
         public virtual ICollection<GroupMember> GroupMemberUsers { get; set; }
+        public virtual ICollection<GroupPlaylist> GroupPlaylistCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupPlaylist> GroupPlaylistLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<GroupPlaylistRating> GroupPlaylistRatingCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupPlaylistRating> GroupPlaylistRatingLastUpdatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestion> GroupSuggestionCreatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestion> GroupSuggestionLastUpdatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingCreatedByNavigations { get; set; }
         public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<Playlist> PlaylistCreatedByNavigations { get; set; }
+        public virtual ICollection<Playlist> PlaylistLastUpdatedByNavigations { get; set; }
         public virtual ICollection<UserImage> UserImages { get; set; }
         public virtual ICollection<UserVerification> UserVerifications { get; set; }
     }

@@ -11,6 +11,7 @@ namespace Shufl.Domain.Entities
         {
             GroupInvites = new HashSet<GroupInvite>();
             GroupMembers = new HashSet<GroupMember>();
+            GroupPlaylists = new HashSet<GroupPlaylist>();
             GroupSuggestions = new HashSet<GroupSuggestion>();
         }
 
@@ -27,6 +28,7 @@ namespace Shufl.Domain.Entities
         public virtual User LastUpatedByNavigation { get; set; }
         public virtual ICollection<GroupInvite> GroupInvites { get; set; }
         public virtual ICollection<GroupMember> GroupMembers { get; set; }
+        public virtual ICollection<GroupPlaylist> GroupPlaylists { get; set; }
         public virtual ICollection<GroupSuggestion> GroupSuggestions { get; set; }
     }
 }
