@@ -721,11 +721,10 @@ namespace Shufl.Domain.Entities
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
 
-                entity.Property(e => e.Uri)
+                entity.Property(e => e.Url)
                     .IsRequired()
-                    .HasMaxLength(40)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserImages)
