@@ -21,6 +21,7 @@ namespace Shufl.Domain.Entities
         public Guid LastUpdatedBy { get; set; }
 
         public virtual User CreatedByNavigation { get; set; }
+        public virtual GroupAlbum GroupAlbum { get; set; }
         public virtual User LastUpdatedByNavigation { get; set; }
     }
 }

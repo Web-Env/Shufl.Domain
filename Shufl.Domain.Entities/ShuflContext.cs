@@ -335,6 +335,12 @@ namespace Shufl.Domain.Entities
                     .HasForeignKey(d => d.CreatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
+                entity.HasOne(d => d.GroupAlbum)
+                    .WithMany(p => p.GroupAlbumRatings)
+                    .HasForeignKey(d => d.GroupAlbumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupAlbumRating_GroupAlbum");
+
                 entity.HasOne(d => d.LastUpdatedByNavigation)
                     .WithMany(p => p.GroupAlbumRatingLastUpdatedByNavigations)
                     .HasForeignKey(d => d.LastUpdatedBy)

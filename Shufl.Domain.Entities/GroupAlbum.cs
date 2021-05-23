@@ -7,6 +7,11 @@ namespace Shufl.Domain.Entities
 {
     public partial class GroupAlbum
     {
+        public GroupAlbum()
+        {
+            GroupAlbumRatings = new HashSet<GroupAlbumRating>();
+        }
+
         public Guid Id { get; set; }
         public Guid GroupId { get; set; }
         public string Identifier { get; set; }
@@ -21,5 +26,6 @@ namespace Shufl.Domain.Entities
         public virtual User CreatedByNavigation { get; set; }
         public virtual Group Group { get; set; }
         public virtual User LastUpdatedByNavigation { get; set; }
+        public virtual ICollection<GroupAlbumRating> GroupAlbumRatings { get; set; }
     }
 }
