@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Shufl.Domain.Entities
 {
-    public partial class GroupSuggestion
+    public partial class GroupAlbum
     {
-        public GroupSuggestion()
+        public GroupAlbum()
         {
-            GroupSuggestionRatings = new HashSet<GroupSuggestionRating>();
+            GroupAlbumRatings = new HashSet<GroupAlbumRating>();
         }
 
         public Guid Id { get; set; }
@@ -26,6 +26,6 @@ namespace Shufl.Domain.Entities
         public virtual User CreatedByNavigation { get; set; }
         public virtual Group Group { get; set; }
         public virtual User LastUpdatedByNavigation { get; set; }
-        public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatings { get; set; }
+        public virtual ICollection<GroupAlbumRating> GroupAlbumRatings { get; set; }
     }
 }

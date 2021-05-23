@@ -20,12 +20,12 @@ namespace Shufl.Domain.Repositories
         public IArtistGenreRepository ArtistGenreRepository { get; private set; }
         public IGenreRepository GenreRepository { get; private set; }
         public IGroupRepository GroupRepository { get; private set; }
+        public IGroupAlbumRepository GroupAlbumRepository { get; private set; }
+        public IGroupAlbumRatingRepository GroupAlbumRatingRepository { get; private set; }
         public IGroupInviteRepository GroupInviteRepository { get; private set; }
         public IGroupMemberRepository GroupMemberRepository { get; private set; }
         public IGroupPlaylistRepository GroupPlaylistRepository { get; private set; }
         public IGroupPlaylistRatingRepository GroupPlaylistRatingRepository { get; private set; }
-        public IGroupSuggestionRepository GroupSuggestionRepository { get; private set; }
-        public IGroupSuggestionRatingRepository GroupSuggestionRatingRepository { get; private set; }
         public IPasswordResetRepository PasswordResetRepository { get; private set; }
         public IPlaylistRepository PlaylistRepository { get; private set; }
         public IPlaylistImageRepository PlaylistImageRepository { get; private set; }
@@ -45,12 +45,12 @@ namespace Shufl.Domain.Repositories
             ArtistGenreRepository = new ArtistGenreRepository(context);
             GenreRepository = new GenreRepository(context);
             GroupRepository = new GroupRepository(context);
+            GroupAlbumRepository = new GroupAlbumRepository(context);
+            GroupAlbumRatingRepository = new GroupAlbumRatingRepository(context);
             GroupInviteRepository = new GroupInviteRepository(context);
             GroupMemberRepository = new GroupMemberRepository(context);
             GroupPlaylistRepository = new GroupPlaylistRepository(context);
             GroupPlaylistRatingRepository = new GroupPlaylistRatingRepository(context);
-            GroupSuggestionRepository = new GroupSuggestionRepository(context);
-            GroupSuggestionRatingRepository = new GroupSuggestionRatingRepository(context);
             PasswordResetRepository = new PasswordResetRepository(context);
             PlaylistRepository = new PlaylistRepository(context);
             PlaylistImageRepository = new PlaylistImageRepository(context);

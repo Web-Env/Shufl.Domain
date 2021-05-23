@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Shufl.Domain.Repositories.Group
 {
-    public class GroupSuggestionRepository : RepositoryBase<GroupSuggestion>, IGroupSuggestionRepository
+    public class GroupAlbumRepository : RepositoryBase<GroupAlbum>, IGroupAlbumRepository
     {
-        public GroupSuggestionRepository(ShuflContext context) : base(context) { }
+        public GroupAlbumRepository(ShuflContext context) : base(context) { }
 
-        public async Task<IEnumerable<GroupSuggestion>> GetByGroupIdAsync(Guid groupId, int page, int pageSize)
+        public async Task<IEnumerable<GroupAlbum>> GetByGroupIdAsync(Guid groupId, int page, int pageSize)
         {
             var offset = pageSize * page;
 
-            return await _ShuflContext.GroupSuggestions.Where(gs => gs.GroupId == groupId)
+            return await _ShuflContext.GroupAlbums.Where(gs => gs.GroupId == groupId)
                 .OrderByDescending(gs => gs.CreatedOn)
                 .Skip(offset)
                 .Take(pageSize)
@@ -27,7 +27,7 @@ namespace Shufl.Domain.Repositories.Group
                                 .ThenInclude(ag => ag.Genre)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumImages)
-                .Include(gs => gs.GroupSuggestionRatings)
+                .Include(gs => gs.GroupAlbumRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
                 .Include(gs => gs.CreatedByNavigation)
                     .ThenInclude(u => u.UserImages)
@@ -36,9 +36,9 @@ namespace Shufl.Domain.Repositories.Group
                 .ToListAsync();
         }
 
-        public async Task<GroupSuggestion> GetByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId)
+        public async Task<GroupAlbum> GetByIdentifierAndGroupIdAsync(string groupAlbumIdentifier, Guid groupId)
         {
-            return await _ShuflContext.GroupSuggestions.Where(gs => gs.Identifier == groupSuggestionIdentifier && gs.Group.Id == groupId)
+            return await _ShuflContext.GroupAlbums.Where(gs => gs.Identifier == groupAlbumIdentifier && gs.Group.Id == groupId)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumArtists)
                         .ThenInclude(aa => aa.Artist)
@@ -46,7 +46,7 @@ namespace Shufl.Domain.Repositories.Group
                                 .ThenInclude(ag => ag.Genre)
                 .Include(gs => gs.Album)
                     .ThenInclude(a => a.AlbumImages)
-                .Include(gs => gs.GroupSuggestionRatings)
+                .Include(gs => gs.GroupAlbumRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
                 .Include(gs => gs.CreatedByNavigation)
                 .AsSplitQuery()
@@ -54,10 +54,10 @@ namespace Shufl.Domain.Repositories.Group
                 .FirstOrDefaultAsync();
         }
         
-        public async Task<GroupSuggestion> CheckExistsByIdentifierAndGroupIdAsync(string groupSuggestionIdentifier, Guid groupId)
+        public async Task<GroupAlbum> CheckExistsByIdentifierAndGroupIdAsync(string groupAlbumIdentifier, Guid groupId)
         {
-            return await _ShuflContext.GroupSuggestions.Where(gs =>
-                gs.Identifier == groupSuggestionIdentifier &&
+            return await _ShuflContext.GroupAlbums.Where(gs =>
+                gs.Identifier == groupAlbumIdentifier &&
                 gs.GroupId == groupId).FirstOrDefaultAsync();
         }
     }

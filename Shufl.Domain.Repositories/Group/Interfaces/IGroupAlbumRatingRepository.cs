@@ -3,7 +3,7 @@ using Shufl.Domain.Repositories.Interfaces;
 
 namespace Shufl.Domain.Repositories.Group.Interfaces
 {
-    public interface IGroupSuggestionRatingRepository : IRepositoryBase<GroupSuggestionRating>
+    public interface IGroupAlbumRatingRepository : IRepositoryBase<GroupAlbumRating>
     {
     }
 }

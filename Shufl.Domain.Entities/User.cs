@@ -9,6 +9,10 @@ namespace Shufl.Domain.Entities
     {
         public User()
         {
+            GroupAlbumCreatedByNavigations = new HashSet<GroupAlbum>();
+            GroupAlbumLastUpdatedByNavigations = new HashSet<GroupAlbum>();
+            GroupAlbumRatingCreatedByNavigations = new HashSet<GroupAlbumRating>();
+            GroupAlbumRatingLastUpdatedByNavigations = new HashSet<GroupAlbumRating>();
             GroupCreatedByNavigations = new HashSet<Group>();
             GroupInviteCreatedByNavigations = new HashSet<GroupInvite>();
             GroupInviteLastUpdatedByNavigations = new HashSet<GroupInvite>();
@@ -20,10 +24,6 @@ namespace Shufl.Domain.Entities
             GroupPlaylistLastUpdatedByNavigations = new HashSet<GroupPlaylist>();
             GroupPlaylistRatingCreatedByNavigations = new HashSet<GroupPlaylistRating>();
             GroupPlaylistRatingLastUpdatedByNavigations = new HashSet<GroupPlaylistRating>();
-            GroupSuggestionCreatedByNavigations = new HashSet<GroupSuggestion>();
-            GroupSuggestionLastUpdatedByNavigations = new HashSet<GroupSuggestion>();
-            GroupSuggestionRatingCreatedByNavigations = new HashSet<GroupSuggestionRating>();
-            GroupSuggestionRatingLastUpdatedByNavigations = new HashSet<GroupSuggestionRating>();
             PlaylistCreatedByNavigations = new HashSet<Playlist>();
             PlaylistLastUpdatedByNavigations = new HashSet<Playlist>();
             UserImages = new HashSet<UserImage>();
@@ -47,6 +47,10 @@ namespace Shufl.Domain.Entities
         public DateTime? LastUpdatedOn { get; set; }
         public Guid? LastUpdatedBy { get; set; }
 
+        public virtual ICollection<GroupAlbum> GroupAlbumCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupAlbum> GroupAlbumLastUpdatedByNavigations { get; set; }
+        public virtual ICollection<GroupAlbumRating> GroupAlbumRatingCreatedByNavigations { get; set; }
+        public virtual ICollection<GroupAlbumRating> GroupAlbumRatingLastUpdatedByNavigations { get; set; }
         public virtual ICollection<Group> GroupCreatedByNavigations { get; set; }
         public virtual ICollection<GroupInvite> GroupInviteCreatedByNavigations { get; set; }
         public virtual ICollection<GroupInvite> GroupInviteLastUpdatedByNavigations { get; set; }
@@ -58,10 +62,6 @@ namespace Shufl.Domain.Entities
         public virtual ICollection<GroupPlaylist> GroupPlaylistLastUpdatedByNavigations { get; set; }
         public virtual ICollection<GroupPlaylistRating> GroupPlaylistRatingCreatedByNavigations { get; set; }
         public virtual ICollection<GroupPlaylistRating> GroupPlaylistRatingLastUpdatedByNavigations { get; set; }
-        public virtual ICollection<GroupSuggestion> GroupSuggestionCreatedByNavigations { get; set; }
-        public virtual ICollection<GroupSuggestion> GroupSuggestionLastUpdatedByNavigations { get; set; }
-        public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingCreatedByNavigations { get; set; }
-        public virtual ICollection<GroupSuggestionRating> GroupSuggestionRatingLastUpdatedByNavigations { get; set; }
         public virtual ICollection<Playlist> PlaylistCreatedByNavigations { get; set; }
         public virtual ICollection<Playlist> PlaylistLastUpdatedByNavigations { get; set; }
         public virtual ICollection<UserImage> UserImages { get; set; }
