@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Shufl.Domain.Entities
 {
-    public partial class GroupSuggestionRating
+    public partial class GroupAlbumRating
     {
         public Guid Id { get; set; }
-        public Guid GroupSuggestionId { get; set; }
+        public Guid GroupAlbumId { get; set; }
         public decimal OverallRating { get; set; }
         public decimal? LyricsRating { get; set; }
         public decimal? VocalsRating { get; set; }
@@ -21,7 +21,6 @@ namespace Shufl.Domain.Entities
         public Guid LastUpdatedBy { get; set; }
 
         public virtual User CreatedByNavigation { get; set; }
-        public virtual GroupSuggestion GroupSuggestion { get; set; }
         public virtual User LastUpdatedByNavigation { get; set; }
     }
 }

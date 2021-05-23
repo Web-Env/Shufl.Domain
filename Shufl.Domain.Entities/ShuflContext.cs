@@ -25,12 +25,12 @@ namespace Shufl.Domain.Entities
         public virtual DbSet<ArtistImage> ArtistImages { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<GroupAlbum> GroupAlbums { get; set; }
+        public virtual DbSet<GroupAlbumRating> GroupAlbumRatings { get; set; }
         public virtual DbSet<GroupInvite> GroupInvites { get; set; }
         public virtual DbSet<GroupMember> GroupMembers { get; set; }
         public virtual DbSet<GroupPlaylist> GroupPlaylists { get; set; }
         public virtual DbSet<GroupPlaylistRating> GroupPlaylistRatings { get; set; }
-        public virtual DbSet<GroupSuggestion> GroupSuggestions { get; set; }
-        public virtual DbSet<GroupSuggestionRating> GroupSuggestionRatings { get; set; }
         public virtual DbSet<PasswordReset> PasswordResets { get; set; }
         public virtual DbSet<Playlist> Playlists { get; set; }
         public virtual DbSet<PlaylistImage> PlaylistImages { get; set; }
@@ -258,6 +258,89 @@ namespace Shufl.Domain.Entities
                     .HasConstraintName("FK_Group_User_LastUpdatedBy");
             });
 
+            modelBuilder.Entity<GroupAlbum>(entity =>
+            {
+                entity.ToTable("GroupAlbum");
+
+                entity.HasIndex(e => new { e.GroupId, e.AlbumId }, "IX_GroupAlbum_GroupId_AlbumId");
+
+                entity.HasIndex(e => new { e.GroupId, e.Identifier }, "IX_GroupAlbum_GroupId_Identifier")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Identifier)
+                    .IsRequired()
+                    .HasMaxLength(24)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.IsRandom)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Album)
+                    .WithMany(p => p.GroupAlbums)
+                    .HasForeignKey(d => d.AlbumId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupAlbum_Album");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.GroupAlbumCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.GroupAlbums)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_GroupAlbum_Group");
+
+                entity.HasOne(d => d.LastUpdatedByNavigation)
+                    .WithMany(p => p.GroupAlbumLastUpdatedByNavigations)
+                    .HasForeignKey(d => d.LastUpdatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<GroupAlbumRating>(entity =>
+            {
+                entity.ToTable("GroupAlbumRating");
+
+                entity.HasIndex(e => e.GroupAlbumId, "IX_GroupAlbumRating");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
+
+                entity.Property(e => e.Comment).HasMaxLength(1500);
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.InstrumentalsRating).HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.LyricsRating).HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.OverallRating).HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.StructureRating).HasColumnType("decimal(3, 1)");
+
+                entity.Property(e => e.VocalsRating).HasColumnType("decimal(3, 1)");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.GroupAlbumRatingCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.LastUpdatedByNavigation)
+                    .WithMany(p => p.GroupAlbumRatingLastUpdatedByNavigations)
+                    .HasForeignKey(d => d.LastUpdatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
             modelBuilder.Entity<GroupInvite>(entity =>
             {
                 entity.ToTable("GroupInvite");
@@ -404,95 +487,6 @@ namespace Shufl.Domain.Entities
 
                 entity.HasOne(d => d.LastUpdatedByNavigation)
                     .WithMany(p => p.GroupPlaylistRatingLastUpdatedByNavigations)
-                    .HasForeignKey(d => d.LastUpdatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-            modelBuilder.Entity<GroupSuggestion>(entity =>
-            {
-                entity.ToTable("GroupSuggestion");
-
-                entity.HasIndex(e => new { e.GroupId, e.AlbumId }, "IX_GroupSuggestion_GroupId_AlbumId");
-
-                entity.HasIndex(e => new { e.GroupId, e.Identifier }, "IX_GroupSuggestion_GroupId_Identifier")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
-
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-
-                entity.Property(e => e.Identifier)
-                    .IsRequired()
-                    .HasMaxLength(24)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.IsRandom)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
-                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Album)
-                    .WithMany(p => p.GroupSuggestions)
-                    .HasForeignKey(d => d.AlbumId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GroupSuggestion_Album");
-
-                entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany(p => p.GroupSuggestionCreatedByNavigations)
-                    .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.GroupSuggestions)
-                    .HasForeignKey(d => d.GroupId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GroupSuggestion_Group");
-
-                entity.HasOne(d => d.LastUpdatedByNavigation)
-                    .WithMany(p => p.GroupSuggestionLastUpdatedByNavigations)
-                    .HasForeignKey(d => d.LastUpdatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-
-            modelBuilder.Entity<GroupSuggestionRating>(entity =>
-            {
-                entity.ToTable("GroupSuggestionRating");
-
-                entity.HasIndex(e => e.GroupSuggestionId, "IX_GroupSuggestionRating");
-
-                entity.Property(e => e.Id).HasDefaultValueSql("(newsequentialid())");
-
-                entity.Property(e => e.Comment).HasMaxLength(1500);
-
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-
-                entity.Property(e => e.InstrumentalsRating).HasColumnType("decimal(3, 1)");
-
-                entity.Property(e => e.LastUpdatedOn).HasColumnType("datetime");
-
-                entity.Property(e => e.LyricsRating).HasColumnType("decimal(3, 1)");
-
-                entity.Property(e => e.OverallRating).HasColumnType("decimal(3, 1)");
-
-                entity.Property(e => e.StructureRating).HasColumnType("decimal(3, 1)");
-
-                entity.Property(e => e.VocalsRating).HasColumnType("decimal(3, 1)");
-
-                entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany(p => p.GroupSuggestionRatingCreatedByNavigations)
-                    .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.GroupSuggestion)
-                    .WithMany(p => p.GroupSuggestionRatings)
-                    .HasForeignKey(d => d.GroupSuggestionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GroupSuggestionRating_GroupSuggestion");
-
-                entity.HasOne(d => d.LastUpdatedByNavigation)
-                    .WithMany(p => p.GroupSuggestionRatingLastUpdatedByNavigations)
                     .HasForeignKey(d => d.LastUpdatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });

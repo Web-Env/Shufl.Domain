@@ -9,10 +9,10 @@ namespace Shufl.Domain.Entities
     {
         public Group()
         {
+            GroupAlbums = new HashSet<GroupAlbum>();
             GroupInvites = new HashSet<GroupInvite>();
             GroupMembers = new HashSet<GroupMember>();
             GroupPlaylists = new HashSet<GroupPlaylist>();
-            GroupSuggestions = new HashSet<GroupSuggestion>();
         }
 
         public Guid Id { get; set; }
@@ -26,9 +26,9 @@ namespace Shufl.Domain.Entities
 
         public virtual User CreatedByNavigation { get; set; }
         public virtual User LastUpatedByNavigation { get; set; }
+        public virtual ICollection<GroupAlbum> GroupAlbums { get; set; }
         public virtual ICollection<GroupInvite> GroupInvites { get; set; }
         public virtual ICollection<GroupMember> GroupMembers { get; set; }
         public virtual ICollection<GroupPlaylist> GroupPlaylists { get; set; }
-        public virtual ICollection<GroupSuggestion> GroupSuggestions { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Shufl.Domain.Entities
         {
             AlbumArtists = new HashSet<AlbumArtist>();
             AlbumImages = new HashSet<AlbumImage>();
-            GroupSuggestions = new HashSet<GroupSuggestion>();
+            GroupAlbums = new HashSet<GroupAlbum>();
             Tracks = new HashSet<Track>();
         }
 
@@ -25,7 +25,7 @@ namespace Shufl.Domain.Entities
 
         public virtual ICollection<AlbumArtist> AlbumArtists { get; set; }
         public virtual ICollection<AlbumImage> AlbumImages { get; set; }
-        public virtual ICollection<GroupSuggestion> GroupSuggestions { get; set; }
+        public virtual ICollection<GroupAlbum> GroupAlbums { get; set; }
         public virtual ICollection<Track> Tracks { get; set; }
     }
 }

@@ -23,6 +23,10 @@ namespace Shufl.Domain.Repositories.Interfaces
 
         IGroupRepository GroupRepository { get; }
 
+        IGroupAlbumRepository GroupAlbumRepository { get; }
+
+        IGroupAlbumRatingRepository GroupAlbumRatingRepository { get; }
+
         IGroupInviteRepository GroupInviteRepository { get; }
 
         IGroupMemberRepository GroupMemberRepository { get; }
@@ -30,10 +34,6 @@ namespace Shufl.Domain.Repositories.Interfaces
         IGroupPlaylistRepository GroupPlaylistRepository { get; }
 
         IGroupPlaylistRatingRepository GroupPlaylistRatingRepository { get; }
-
-        IGroupSuggestionRepository GroupSuggestionRepository { get; }
-
-        IGroupSuggestionRatingRepository GroupSuggestionRatingRepository { get; }
 
         IPasswordResetRepository PasswordResetRepository { get; }
 

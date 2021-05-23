@@ -3,8 +3,8 @@ using Shufl.Domain.Repositories.Group.Interfaces;
 
 namespace Shufl.Domain.Repositories.Group
 {
-    public class GroupSuggestionRatingRepository : RepositoryBase<GroupSuggestionRating>, IGroupSuggestionRatingRepository
+    public class GroupAlbumRatingRepository : RepositoryBase<GroupAlbumRating>, IGroupAlbumRatingRepository
     {
-        public GroupSuggestionRatingRepository(ShuflContext context) : base(context) { }
+        public GroupAlbumRatingRepository(ShuflContext context) : base(context) { }
     }
 }
