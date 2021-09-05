@@ -10,6 +10,10 @@ namespace Shufl.Domain.Repositories.Group.Interfaces
     {
         Task<IEnumerable<GroupAlbum>> GetByGroupIdAsync(Guid groupId, int page, int pageSize);
 
+        Task<int> GetCountByGroupIdAsync(Guid groupId);
+
+        Task<IEnumerable<GroupAlbum>> GetTopThirtyByGroupIdAsync(Guid groupId);
+
         Task<GroupAlbum> GetByIdentifierAndGroupIdAsync(string groupAlbumIdentifier, Guid groupId);
 
         Task<GroupAlbum> CheckExistsByIdentifierAndGroupIdAsync(string groupAlbumIdentifier, Guid groupId);
