@@ -304,6 +304,11 @@ namespace Shufl.Domain.Entities
                     .WithMany(p => p.GroupAlbumLastUpdatedByNavigations)
                     .HasForeignKey(d => d.LastUpdatedBy)
                     .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.RelatedGroupAlbum)
+                    .WithMany(p => p.InverseRelatedGroupAlbum)
+                    .HasForeignKey(d => d.RelatedGroupAlbumId)
+                    .HasConstraintName("FK_GroupAlbum_GroupAlbum");
             });
 
             modelBuilder.Entity<GroupAlbumRating>(entity =>
