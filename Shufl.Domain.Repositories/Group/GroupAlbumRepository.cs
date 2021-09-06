@@ -67,6 +67,8 @@ namespace Shufl.Domain.Repositories.Group
                     .ThenInclude(a => a.AlbumImages)
                 .Include(ga => ga.GroupAlbumRatings)
                     .ThenInclude(gsr => gsr.CreatedByNavigation)
+                .Include(ga => ga.RelatedGroupAlbum)
+                    .ThenInclude(rga => rga.Album)
                 .Include(ga => ga.CreatedByNavigation)
                 .AsSplitQuery()
                 .AsNoTracking()
