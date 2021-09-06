@@ -10,6 +10,7 @@ namespace Shufl.Domain.Entities
         public GroupAlbum()
         {
             GroupAlbumRatings = new HashSet<GroupAlbumRating>();
+            InverseRelatedGroupAlbum = new HashSet<GroupAlbum>();
         }
 
         public Guid Id { get; set; }
@@ -17,6 +18,7 @@ namespace Shufl.Domain.Entities
         public string Identifier { get; set; }
         public bool? IsRandom { get; set; }
         public Guid AlbumId { get; set; }
+        public Guid? RelatedGroupAlbumId { get; set; }
         public DateTime CreatedOn { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime LastUpdatedOn { get; set; }
@@ -26,6 +28,8 @@ namespace Shufl.Domain.Entities
         public virtual User CreatedByNavigation { get; set; }
         public virtual Group Group { get; set; }
         public virtual User LastUpdatedByNavigation { get; set; }
+        public virtual GroupAlbum RelatedGroupAlbum { get; set; }
         public virtual ICollection<GroupAlbumRating> GroupAlbumRatings { get; set; }
+        public virtual ICollection<GroupAlbum> InverseRelatedGroupAlbum { get; set; }
     }
 }
